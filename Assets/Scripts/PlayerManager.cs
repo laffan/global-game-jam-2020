@@ -70,7 +70,6 @@ public class PlayerManager : MonoBehaviour
   {
     if (!isAlive)
     {
-      Debug.Log(" I have died. ");
       SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
 
     }
@@ -80,7 +79,6 @@ public class PlayerManager : MonoBehaviour
   {
     if (didWin)
     {
-      Debug.Log(" I have won! ");
       SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 2 );
 
     }

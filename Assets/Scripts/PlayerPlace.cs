@@ -57,29 +57,29 @@ public class PlayerPlace : MonoBehaviour
       detachedItem.GetComponent<Collider>().isTrigger = true; // Allow long beams to pass through player;
 
       heldItem.active = false; // Disable original block.
+                               // Update prefab
+      detachedItem.GetComponent<PickupManager>().skin = "ghost";
+      // Hide from raycast
+      detachedItem.layer = 0;
+
+
+
+      // Postion above block
+
+      if (detachedItem.GetComponent<PickupManager>().pickupType == "cinderblock")
+      {
+        Transform blockYouHit = rayHit.collider.transform;
+        itemPlace = new Vector3(blockYouHit.position.x - 0.5f, blockYouHit.position.y + 1, blockYouHit.position.z);
+      }
+      if (detachedItem.GetComponent<PickupManager>().pickupType == "plank")
+      {
+        itemPlace = new Vector3(Mathf.Round(rayHit.point.x), Mathf.Round(rayHit.point.y), Mathf.Round(rayHit.point.z));
+      }
+
+      detachedItem.transform.position = itemPlace;
+      previousitemPlace = itemPlace;
+
     }
-    // Update prefab
-    detachedItem.GetComponent<PickupManager>().skin = "ghost";
-    // Hide from raycast
-    detachedItem.layer = 0;
-
-
-    // Postion above block
-
-    if ( detachedItem.GetComponent<PickupManager>().pickupType == "cinderblock") {
-      Debug.Log("Positioning cinderblock");
-      Transform blockYouHit = rayHit.collider.transform;
-      itemPlace = new Vector3(blockYouHit.position.x - 0.5f, blockYouHit.position.y + 1, blockYouHit.position.z);
-    }
-    if ( detachedItem.GetComponent<PickupManager>().pickupType == "plank") {
-      Debug.Log("Positioning plank");
-      itemPlace = new Vector3(Mathf.Round(rayHit.point.x), Mathf.Round(rayHit.point.y), Mathf.Round(rayHit.point.z));
-    }
-
-    detachedItem.transform.position = itemPlace;
-    previousitemPlace = itemPlace;
-
-
   }
 
   void stopPositioning()
@@ -94,8 +94,8 @@ public class PlayerPlace : MonoBehaviour
   void placeItem()
   {
     float roughness = Random.Range(-0.1f, 0.2f);
-    Vector3 currentPosition = new Vector3( detachedItem.transform.position.x, detachedItem.transform.position.y, detachedItem.transform.position.z);
-    detachedItem.transform.position = new Vector3( currentPosition.x, currentPosition.y, currentPosition.z + roughness);
+    Vector3 currentPosition = new Vector3(detachedItem.transform.position.x, detachedItem.transform.position.y, detachedItem.transform.position.z);
+    detachedItem.transform.position = new Vector3(currentPosition.x, currentPosition.y, currentPosition.z + roughness);
 
     detachedItem.GetComponent<Collider>().tag = "Placed";
     detachedItem.GetComponent<PickupManager>().skin = "original"; // Update materials.
@@ -116,7 +116,6 @@ public class PlayerPlace : MonoBehaviour
 
   IEnumerator SetKinematic()
   {
-    Debug.Log("Setting Plank Kinematics");
     yield return new WaitForSeconds(2);
     placedObjects = GameObject.FindGameObjectsWithTag("Placed");
     foreach (GameObject placedObject in placedObjects)

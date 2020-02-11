@@ -17,12 +17,10 @@ public class WallEditor : Editor
     WallBuilder builder= (WallBuilder)target;
 
     if ( GUILayout.Button("Build Wall")){
-      // Debug.Log("Pressed");
       builder.buildTheWall();
     }
 
     if ( GUILayout.Button("Destroy Wall")){
-      // Debug.Log("Pressed");
       builder.destroyWall();
     }
   }

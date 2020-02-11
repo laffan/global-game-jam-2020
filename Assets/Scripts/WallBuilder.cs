@@ -28,7 +28,6 @@ public class WallBuilder : MonoBehaviour
 
   public void buildTheWall()
   {
-    Debug.Log("Building Wall");
     destroyWall();
     blocker.active = true;
 
@@ -46,14 +45,10 @@ public class WallBuilder : MonoBehaviour
 
     Vector3 brickSize = Vector3.Scale(transform.localScale, mesh.bounds.size);
 
-    Debug.Log(brickSize.x);
-
     for (int h = 0; h < height; h++)
     {
       for (int w = 0; w < width; w++)
       {
-        Debug.Log("Building wall at " + h + ", " + w);
-
         float brickOffset = Random.Range(-roughness, roughness);
         Vector3 brickPosition = new Vector3(container.transform.position.x + (brickSize.x * w), container.transform.position.y + brickSize.y * h, container.transform.position.z + brickOffset);
         Vector3 checkPosition = new Vector3(container.transform.position.x + (brickSize.x * w) + (brickSize.x / 2), container.transform.position.y + (brickSize.y * h) + (brickSize.y / 2), container.transform.position.z + brickOffset);

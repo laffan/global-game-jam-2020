@@ -13,7 +13,6 @@ public class WallExplosion : MonoBehaviour
   public void Explode()
   {
     int explodedBlocks = 0;
-    Debug.Log("Explode!");
     Vector3 explosionPos = transform.position;
     Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
     foreach (Collider hit in colliders)
@@ -30,6 +29,5 @@ public class WallExplosion : MonoBehaviour
         }
       }
     }
-    Debug.Log(explodedBlocks + " blocks exploded");
   }
 }

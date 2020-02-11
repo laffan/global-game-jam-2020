@@ -19,22 +19,14 @@ public class WallManager : MonoBehaviour
     int placedBricks = placedBricksList.Length;
     int enemiesAtWall = enemyManager.GetComponent<EnemyManager>().enemiesAtTheWall;
 
-    // Debug.Log( "Enemies at wall: " + enemiesAtWall + " / Bricks placed: " + placedBricks );
 
     if (wallExists)
     {
       if ( enemiesAtWall > placedBricks * 3 )
       {
-        Debug.Log("The wall has fallen");
         destroyWall();
         wallExists = false;
       }
-      // if ((placedBricks.Length == 0) && (enemiesAtWall != 0))
-      // {
-      //   Debug.Log("The wall has fallen due to laziness.");
-      //   destroyWall();
-      //   wallExists = false;
-      // }
     }
   }
 
